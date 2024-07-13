@@ -440,7 +440,7 @@ get_char && show_menu
 }
 
 acme() {
-bash <(curl -Ls https://github.com/lynnhou/acme-script/raw/main/acme.sh)
+bash <(curl -Ls https://gitlab.com/rwkgyg/acme-script/raw/main/acme.sh)
 back
 }
 
@@ -450,7 +450,7 @@ back
 }
 
 cfwarp() {
-bash <(curl -Ls https://github.com/lynnhou/CFwarp/raw/main/CFwarp.sh)
+bash <(curl -Ls https://gitlab.com/rwkgyg/CFwarp/raw/main/CFwarp.sh)
 back
 }
 
