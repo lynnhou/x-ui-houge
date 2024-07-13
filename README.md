@@ -22,11 +22,11 @@
 
 ### 一键脚本：
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/lynnhou/x-ui-yg/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/install.sh)
 ```
 或
 ```
-bash <(wget -qO- https://raw.githubusercontent.com/lynnhou/x-ui-yg/main/install.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/install.sh)
 ```
 
 ---------------------------------------
