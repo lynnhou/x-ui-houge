@@ -57,7 +57,7 @@ bbr="Openvz/Lxc"
 fi
 
 if [ ! -f xuiyg_update ]; then
-green "首次安装x-ui-yg脚本必要的依赖……"
+green "首次安装x-ui-houge脚本必要的依赖……"
 if [[ x"${release}" == x"alpine" ]]; then
 apk update
 apk add wget curl tar jq tzdata openssl expect git socat iproute2
@@ -156,8 +156,8 @@ fi
 serinstall(){
 green "下载并安装x-ui相关组件……"
 cd /usr/local/
-#curl -sSL -o /usr/local/x-ui-linux-${cpu}.tar.gz --insecure https://gitlab.com/rwkgyg/x-ui-yg/raw/main/x-ui-linux-${cpu}.tar.gz
-curl -sSL -o /usr/local/x-ui-linux-${cpu}.tar.gz --insecure https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/x-ui-linux-${cpu}.tar.gz
+#curl -sSL -o /usr/local/x-ui-linux-${cpu}.tar.gz --insecure https://github.com/lynnhou/x-ui-houge/raw/main/x-ui-linux-${cpu}.tar.gz
+curl -sSL -o /usr/local/x-ui-linux-${cpu}.tar.gz --insecure https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/x-ui-linux-${cpu}.tar.gz
 tar zxvf x-ui-linux-${cpu}.tar.gz > /dev/null 2>&1
 rm x-ui-linux-${cpu}.tar.gz -f
 cd x-ui
@@ -167,8 +167,8 @@ systemctl daemon-reload >/dev/null 2>&1
 systemctl enable x-ui >/dev/null 2>&1
 systemctl start x-ui >/dev/null 2>&1
 cd
-#curl -sSL -o /usr/bin/x-ui --insecure https://gitlab.com/rwkgyg/x-ui-yg/raw/main/1install.sh >/dev/null 2>&1
-curl -sSL -o /usr/bin/x-ui --insecure https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/install.sh >/dev/null 2>&1
+#curl -sSL -o /usr/bin/x-ui --insecure https://github.com/lynnhou/x-ui-houge/raw/main/1install.sh >/dev/null 2>&1
+curl -sSL -o /usr/bin/x-ui --insecure https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/install.sh >/dev/null 2>&1
 chmod +x /usr/bin/x-ui
 if [[ x"${release}" == x"alpine" ]]; then
 echo '#!/sbin/openrc-run
@@ -200,7 +200,7 @@ systemctl daemon-reload
 systemctl reset-failed
 fi
 rm /usr/bin/x-ui -f
-rm /etc/x-ui-yg/ -rf
+rm /etc/x-ui-houge/ -rf
 rm /usr/local/x-ui/ -rf
 rm -rf xuiyg_update
 exit
@@ -264,8 +264,8 @@ green "x-ui登录端口：${port}"
 resinstall(){
 echo "----------------------------------------------------------------------"
 restart
-#curl -sL https://gitlab.com/rwkgyg/x-ui-yg/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
-curl -sL https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
+#curl -sL https://github.com/lynnhou/x-ui-houge/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
+curl -sL https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
 xuilogin(){
 v4v6
 if [[ -z $v4 ]]; then
@@ -293,7 +293,7 @@ sleep 2
 xuigo
 cronxui
 echo "----------------------------------------------------------------------"
-blue "x-ui-yg $(cat /usr/local/x-ui/v 2>/dev/null) 安装成功，自动进入 x-ui 显示管理菜单" && sleep 4
+blue "x-ui-houge $(cat /usr/local/x-ui/v 2>/dev/null) 安装成功，自动进入 x-ui 显示管理菜单" && sleep 4
 echo
 show_menu
 }
@@ -313,8 +313,8 @@ resinstall
 
 update() {
 yellow "升级也有可能出意外哦，建议如下："
-yellow "一、点击x-ui面版中的备份与恢复，下载备份文件x-ui-yg.db"
-yellow "二、在 /etc/x-ui-yg 路径导出备份文件x-ui-yg.db"
+yellow "一、点击x-ui面版中的备份与恢复，下载备份文件x-ui-houge.db"
+yellow "二、在 /etc/x-ui-houge 路径导出备份文件x-ui-houge.db"
 readp "确定升级，请按回车(退出请按ctrl+c):" ins
 if [[ -z $ins ]]; then
 if [[ x"${release}" == x"alpine" ]]; then
@@ -324,8 +324,8 @@ systemctl stop x-ui
 fi
 serinstall && sleep 2
 restart
-#curl -sL https://gitlab.com/rwkgyg/x-ui-yg/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
-curl -sL https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
+#curl -sL https://github.com/lynnhou/x-ui-houge/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
+curl -sL https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/version | awk -F "更新内容" '{print $1}' | head -n 1 > /usr/local/x-ui/v
 green "x-ui更新完成" && sleep 2 && x-ui
 else
 red "输入有误" && update
@@ -334,8 +334,8 @@ fi
 
 uninstall() {
 yellow "本次卸载将清除所有数据，建议如下："
-yellow "一、点击x-ui面版中的备份与恢复，下载备份文件x-ui-yg.db"
-yellow "二、在 /etc/x-ui-yg 路径导出备份文件x-ui-yg.db"
+yellow "一、点击x-ui面版中的备份与恢复，下载备份文件x-ui-houge.db"
+yellow "二、在 /etc/x-ui-houge 路径导出备份文件x-ui-houge.db"
 readp "确定卸载，请按回车(退出请按ctrl+c):" ins
 if [[ -z $ins ]]; then
 if [[ x"${release}" == x"alpine" ]]; then
@@ -352,15 +352,15 @@ fi
 kill -15 $(cat /usr/local/x-ui/xuiargopid.log 2>/dev/null) >/dev/null 2>&1
 kill -15 $(cat /usr/local/x-ui/xuiargoympid.log 2>/dev/null) >/dev/null 2>&1
 rm /usr/bin/x-ui -f
-rm /etc/x-ui-yg/ -rf
+rm /etc/x-ui-houge/ -rf
 rm /usr/local/x-ui/ -rf
 uncronxui
-rm -rf xuiyg_update
+rm -rf xuihg_update
 sed -i '/^precedence ::ffff:0:0\/96  100/d' /etc/gai.conf 2>/dev/null
 echo
 green "x-ui已卸载完成"
 echo
-blue "欢迎继续使用x-ui-yg脚本：bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/install.sh)"
+blue "欢迎继续使用x-ui-houge脚本：bash <(curl -Ls https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/install.sh)"
 echo
 else
 red "输入有误" && uninstall
@@ -440,7 +440,7 @@ get_char && show_menu
 }
 
 acme() {
-bash <(curl -Ls https://gitlab.com/rwkgyg/acme-script/raw/main/acme.sh)
+bash <(curl -Ls https://github.com/lynnhou/acme-script/raw/main/acme.sh)
 back
 }
 
@@ -450,7 +450,7 @@ back
 }
 
 cfwarp() {
-bash <(curl -Ls https://gitlab.com/rwkgyg/CFwarp/raw/main/CFwarp.sh)
+bash <(curl -Ls https://github.com/lynnhou/CFwarp/raw/main/CFwarp.sh)
 back
 }
 
@@ -685,7 +685,7 @@ x86_64) cpu=amd64;;
 #x86_64) cpu=cam;;
 esac
 curl -L -o /usr/local/x-ui/cloudflared -# --retry 2 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-$cpu
-#curl -L -o /usr/local/x-ui/cloudflared -# --retry 2 https://gitlab.com/rwkgyg/sing-box-yg/-/raw/main/$cpu
+#curl -L -o /usr/local/x-ui/cloudflared -# --retry 2 https://github.com/lynnhou/sing-box-yg/-/raw/main/$cpu
 chmod +x /usr/local/x-ui/cloudflared
 fi
 }
@@ -2278,19 +2278,17 @@ echo "$baseurl" > /usr/local/x-ui/bin/xui_ty.txt
 
 show_menu(){
 clear
-white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"           
-echo -e "${bblue} ░██     ░██      ░██ ██ ██         ░█${plain}█   ░██     ░██   ░██     ░█${red}█   ░██${plain}  "
-echo -e "${bblue}  ░██   ░██      ░██    ░░██${plain}        ░██  ░██      ░██  ░██${red}      ░██  ░██${plain}   "
-echo -e "${bblue}   ░██ ░██      ░██ ${plain}                ░██ ██        ░██ █${red}█        ░██ ██  ${plain}   "
-echo -e "${bblue}     ░██        ░${plain}██    ░██ ██       ░██ ██        ░█${red}█ ██        ░██ ██  ${plain}  "
-echo -e "${bblue}     ░██ ${plain}        ░██    ░░██        ░██ ░██       ░${red}██ ░██       ░██ ░██ ${plain}  "
-echo -e "${bblue}     ░█${plain}█          ░██ ██ ██         ░██  ░░${red}██     ░██  ░░██     ░██  ░░██ ${plain}  "
-white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
-white "甬哥Github项目  ：github.com/yonggekkk"
-white "甬哥Blogger博客 ：ygkkk.blogspot.com"
-white "甬哥YouTube频道 ：www.youtube.com/@ygkkk"
+white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"           
+echo -e "${bblue} ░██     ░██       ██ ██ ██        ██    ██        █████████        ░████████  "
+echo -e "${bblue} ░██     ░██      ░██   ░██       ░██   ░██       ░██      █        ░█    "
+echo -e "${bblue} ░███████░██      ░██   ░██       ░██   ░██       ░██               ░█    "
+echo -e "${bblue} ░██     ░██      ░██   ░██       ░██   ░██       ░██    ███        ░████████  "
+echo -e "${bblue} ░██     ░██      ░██   ░██       ░██   ░██       ░██      █        ░█    "
+echo -e "${bblue} ░██     ░██      ░██ ██░██       ░██ ██░██       ░█████████        ░████████  "
+white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
+white "猴哥Github项目  ：github.com/lynnhou"
 white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
-white "x-ui-yg脚本快捷方式：x-ui"
+white "x-ui-houge脚本快捷方式：x-ui"
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
 green " 1. 一键安装 x-ui"
 green " 2. 删除卸载 x-ui"
@@ -2309,20 +2307,20 @@ green "12. 刷新当前主菜单参数显示"
 green " 0. 退出脚本"
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
 insV=$(cat /usr/local/x-ui/v 2>/dev/null)
-#latestV=$(curl -s https://gitlab.com/rwkgyg/x-ui-yg/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1)
-latestV=$(curl -sL https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/version | awk -F "更新内容" '{print $1}' | head -n 1)
+#latestV=$(curl -s https://github.com/lynnhou/x-ui-houge/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1)
+latestV=$(curl -sL https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/version | awk -F "更新内容" '{print $1}' | head -n 1)
 if [[ -f /usr/local/x-ui/v ]]; then
 if [ "$insV" = "$latestV" ]; then
-echo -e "当前 x-ui-yg 脚本最新版：${bblue}${insV}${plain} (已安装)"
+echo -e "当前 x-ui-houge 脚本最新版：${bblue}${insV}${plain} (已安装)"
 else
-echo -e "当前 x-ui-yg 脚本版本号：${bblue}${insV}${plain}"
-echo -e "检测到最新 x-ui-yg 脚本版本号：${yellow}${latestV}${plain} (可选择6进行更新)"
-echo -e "${yellow}$(curl -sL https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/version)${plain}"
-#echo -e "${yellow}$(curl -sL https://gitlab.com/rwkgyg/x-ui-yg/-/raw/main/version/version)${plain}"
+echo -e "当前 x-ui-houge 脚本版本号：${bblue}${insV}${plain}"
+echo -e "检测到最新 x-ui-houge 脚本版本号：${yellow}${latestV}${plain} (可选择6进行更新)"
+echo -e "${yellow}$(curl -sL https://raw.githubusercontent.com/lynnhou/x-ui-houge/main/version)${plain}"
+#echo -e "${yellow}$(curl -sL https://github.com/lynnhou/x-ui-houge/-/raw/main/version/version)${plain}"
 fi
 else
-echo -e "当前 x-ui-yg 脚本版本号：${bblue}${latestV}${plain}"
-echo -e "请先选择 1 ，安装 x-ui-yg 脚本"
+echo -e "当前 x-ui-houge 脚本版本号：${bblue}${latestV}${plain}"
+echo -e "请先选择 1 ，安装 x-ui-houge 脚本"
 fi
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
 echo -e "VPS状态如下："
