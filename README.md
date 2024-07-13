@@ -28,12 +28,6 @@ bash <(curl -Ls https://raw.githubusercontent.com/lynnhou/x-ui-yg/main/install.s
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/lynnhou/x-ui-yg/main/install.sh)
 ```
------------------------------------------------------
-### x-ui-houge脚本界面预览图（注：相关参数随意填写，仅供围观）
-
-![179ce8b1d5f7b0327dbc8de45f9bdcc](https://github.com/lynnhou/x-ui-yg/assets/121604513/e28f0beb-efc3-41c1-895e-e39dc8863a37)
-
------------------------------------------------------
 
 ---------------------------------------
 #### 声明：
